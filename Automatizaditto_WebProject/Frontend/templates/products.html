@@ -1,0 +1,88 @@
+{% extends 'layout_catalogs.html' %}
+
+{% block title %}Productos{% endblock %}
+
+{% block styles %}{% endblock %}
+
+{% block scripts %}
+    <script type="module" defer src="../static/js/products_datatables.js"></script>
+    <script type="module" defer src="{{ url_for('static', filename='js/products_validity.js') }}"></script>
+{% endblock %}
+
+{% block head_title %}Productos{% endblock %}
+
+{% block columns %}
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Descripción</th>
+    <th>Código</th>
+{% endblock %}
+
+
+{% block insert_title %}Agregar Producto{% endblock %}
+{% block update_title %}Actualizar Información del Producto{% endblock %}
+{% block delete_content %}del Producto{% endblock %}
+
+
+{% block addRecordForm %}
+    <form id="insertProductForm">
+        <div class="row">
+            <div class="col-md-12 ms-auto">
+                <label for="productName" class="form-label required">Nombre:</label>
+                <input id="productName" name="productName" class="form-control" type="text" placeholder="Ejemplo">
+                <small id="productNameNull" class="col-sm-10 ms-auto inputValidity"></small>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-12 ms-auto">
+                <label for="productDesc" class="form-label required">Descripción:</label>
+                <textarea id="productDesc" name="productDesc" class="form-control" placeholder="Ejemplo" style="resize: none;"></textarea>
+                <small id="productDescNull" class="inputValidity"></small>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-12 ms-auto" style="text-align: right;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button id="insertProductButton" type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block updateRecordForm %}
+    <form id="updateProductForm">
+        <div class="row">
+            <div class="col-md-2 ms-auto">
+                <label for="uProductId" class="form-label required">ID:</label>
+                <input id="uProductId" name="uProductId" class="form-control" type="text" disabled>
+            </div>
+            <div class="col-md-10 ms-auto">
+                <label for="uProductName" class="form-label required">Nombre:</label>
+                <input id="uProductName" name="uProductName" class="form-control" type="text" placeholder="Ejemplo">
+                <small id="uProductNameNull" class="inputValidity"></small>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-12 ms-auto">
+                <label for="uProductDesc" class="form-label required">Descripción:</label>
+                <textarea id="uProductDesc" name="uProductDesc" class="form-control" placeholder="Ejemplo" style="resize: none;"></textarea>
+                <small id="uProductDescNull" class="inputValidity"></small>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-12 ms-auto" style="text-align: right;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button id="uProductButton" type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block deleteRecordForm %}
+    <form id="deleteProductForm" action="/delete/delete_product" method="POST">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Aceptar</button>
+    </form>
+{% endblock %}

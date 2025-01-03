@@ -1,0 +1,86 @@
+{% extends 'layout_catalogs.html' %}
+
+
+{% block title %}Configuraciones de Software{% endblock %}
+
+
+{% block styles %}
+    <link href="../static/css/table_test.css" rel="stylesheet">
+{% endblock %}
+
+
+{% block scripts %}
+    <script defer src="../static/js/software-configurations_datatables.js"></script>
+{% endblock %}
+
+
+{% block head_title %}Configuraciones de Software{% endblock %}
+
+
+{% block columns %}
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Descripción</th>
+    <th>Sistema Operativo</th>
+{% endblock %}
+
+
+{% block insert_title %}Agregar Memoria RAM{% endblock %}
+{% block update_title %}Actualizar Información de la Memoria RAM{% endblock %}
+{% block delete_content %}de la Configuración de Software{% endblock %}
+
+
+{% block addRecordForm %}
+    <form id="insertScForm" action="/insert_software_configuration" method="POST">
+        <div class="mb-3">
+            <label for="scName" class="form-label">Nombre:</label>
+            <input id="scName" name="scName" class="form-control" type="text" placeholder="Ejemplo">
+        </div>
+        <div class="mb-3">
+            <label for="scDesc" class="form-label">Descripción:</label>
+            <input id="scDesc" name="scDesc" class="form-control" type="text" placeholder="Ejemplo">
+        </div>
+        <div class="mb-3">
+            <label for="scOpSys" class="form-label">Sistema Operativo:</label>
+            <select id="scOpSys" name="scOpSys" class="form-control scOpSys"></select>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button id="insertScButton" type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block updateRecordForm %}
+    <form id="updateScForm" action="/update_software_configuration" method="POST">
+        <div class="mb-3">
+            <label for="updateScId" class="form-label">ID:</label>
+            <input id="updateScId" name="updateScId" class="form-control" type="text" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="updateScName" class="form-label">Nombre:</label>
+            <input id="updateScName" name="updateScName" class="form-control" type="text" placeholder="Ejemplo">
+        </div>
+        <div class="mb-3">
+            <label for="updateScDesc" class="form-label">Descripción:</label>
+            <input id="updateScDesc" name="updateScDesc" class="form-control" type="text" placeholder="Ejemplo">
+        </div>
+        <div class="mb-3">
+            <label for="updateScOpSys" class="form-label">Sistema Operativo:</label>
+            <select id="updateScOpSys" name="updateScOpSys" class="form-control scOpSys"></select>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button id="updateScButton" type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block deleteRecordForm %}
+    <form id="deleteScForm" action="/delete/delete_soft_conf" method="POST">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Aceptar</button>
+    </form>
+{% endblock %}

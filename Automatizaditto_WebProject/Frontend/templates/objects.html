@@ -1,0 +1,162 @@
+{% extends 'layout_catalogs.html' %}
+
+
+{% block title %}Objetos{% endblock %}
+
+
+{% block styles %}
+    <link href="../static/css/table_test.css" rel="stylesheet">
+{% endblock %}
+
+
+{% block scripts %}
+    <script defer src="../static/js/objects_datatables.js"></script>
+    <script defer src="../static/js/object_insert_validity.js"></script>
+    <script defer src="../static/js/update_object_validity.js"></script>
+{% endblock %}
+
+
+{% block head_title %}Objetos{% endblock %}
+
+
+{% block columns %}
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Tipo de Objeto</th>
+    <th>Descripción</th>
+    <th>Producto</th>
+    <th>Agrupador ID</th>
+    <th>NAME</th>
+    <th>CLASS</th>
+    <th>XPATH</th>
+{% endblock %}
+
+
+{% block insert_title %}Agregar Objeto{% endblock %}
+{% block update_title %}Actualizar Información del Objeto{% endblock %}
+{% block delete_content %}del Objeto{% endblock %}
+
+
+{% block addRecordForm %}
+    <form id="insertObjectForm" action="/insert_object" method="POST">
+        <div class="row">
+            <div class="col-md-12 ms-auto">
+                <label for="objectName" class="form-label required">Nombre:</label>
+                <input id="objectName" name="objectName" class="form-control" type="text" placeholder="Ejemplo">
+                <small id="objectNameNull" class="inputValidity"></small>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-6 ms-auto">
+                <label for="objectType" class="form-label required">Tipo de Objeto:</label>
+                <select id="objectType" name="objectType" class="form-control objectType">
+                    <option value="" disabled selected>Seleccione:</option>
+                </select>
+                <small id="objectTypeNull" class="inputValidity"></small>
+            </div>
+            <div class="col-md-6 ms-auto">
+                <label for="objectProduct" class="form-label required">Producto:</label>
+                <select id="objectProduct" name="objectProduct" class="form-control objectProduct">
+                    <option value="" disabled selected>Seleccione:</option>
+                </select>
+                <small id="objectProductNull" class="inputValidity"></small>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-12 ms-auto">
+                <label for="objectDescription" class="form-label">Descripción:</label>
+                <input id="objectDescription" name="objectDescription" class="form-control" type="text" placeholder="Ejemplo">
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-6 ms-auto">
+                <label for="objectIdGrouper" class="form-label">Agrupador por Id:</label>
+                <input id="objectIdGrouper" name="objectIdGrouper" class="form-control" type="text" placeholder="Ejemplo">
+            </div>
+            <div class="col-md-6 ms-auto">
+                <label for="objectNameGrouper" class="form-label">Agrupador por Nombre:</label>
+                <input id="objectNameGrouper" name="objectNameGrouper" class="form-control" type="text" placeholder="Ejemplo">
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-12 ms-auto">
+                <label for="objectClassGrouper" class="form-label">Agrupador por Clase:</label>
+                <input id="objectClassGrouper" name="objectClassGrouper" class="form-control" type="text" placeholder="Ejemplo">
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-12 ms-auto">
+                <label for="objectXpathGrouper" class="form-label">Agrupador por XPATH:</label>
+                <input id="objectXpathGrouper" name="objectXpathGrouper" class="form-control" type="text" placeholder="Ejemplo">
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-12 ms-auto" style="text-align: right;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button id="insertObjectButton" type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block updateRecordForm %}
+    <form id="updateObjectForm" action="/update_object" method="POST">
+        <div class="row">
+            <div class="col-md-4 ms-auto">
+                <label for="updateObjectId" class="form-label">ID:</label>
+                <input id="updateObjectId" name="updateObjectId" class="form-control" type="text" disabled>
+            </div>
+            <div class="col-md-8 ms-auto">
+                <label for="updateObjectName" class="form-label">Nombre:</label>
+                <input id="updateObjectName" name="updateObjectName" class="form-control" type="text" placeholder="Ejemplo">
+                <small id="updateObjectNameNull" style="color: red;"></small>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="updateObjectDescription" class="form-label">Descripción:</label>
+            <input id="updateObjectDescription" name="updateObjectDescription" class="form-control" type="text" placeholder="Ejemplo">
+        </div>
+        <div class="row">
+            <div class="col-md-6 ms-auto">
+                <label for="updateObjectIdGrouper" class="form-label">Agrupador por Id:</label>
+                <input id="updateObjectIdGrouper" name="updateObjectIdGrouper" class="form-control" type="text" placeholder="Ejemplo">
+            </div>
+            <div class="col-md-6 ms-auto">
+                <label for="updateObjectNameGrouper" class="form-label">Agrupador por Nombre:</label>
+                <input id="updateObjectNameGrouper" name="updateObjectNameGrouper" class="form-control" type="text" placeholder="Ejemplo">
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="updateObjectClassGrouper" class="form-label">Agrupador por Clase:</label>
+            <input id="updateObjectClassGrouper" name="updateObjectClassGrouper" class="form-control" type="text" placeholder="Ejemplo">
+        </div>
+        <div class="mb-3">
+            <label for="updateObjectXpathGrouper" class="form-label">Agrupador por XPATH:</label>
+            <input id="updateObjectXpathGrouper" name="updateObjectXpathGrouper" class="form-control" type="text" placeholder="Ejemplo">
+        </div>
+        <div class="row">
+            <div class="col-md-6 ms-auto">
+                <label for="updateObjectType">Tipo de Objeto:</label>
+                <select id="updateObjectType" name="updateObjectType" class="form-control objectType"></select>
+            </div>
+            <div class="col-md-6 ms-auto">
+                <label for="updateObjectProduct">Producto:</label>
+                <select id="updateObjectProduct" name="updateObjectProduct" class="form-control objectProduct"></select>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button id="updateObjectButton" type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block deleteRecordForm %}
+    <form id="deleteObjectForm" action="/delete/delete_object" method="POST">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Aceptar</button>
+    </form>
+{% endblock %}

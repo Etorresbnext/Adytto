@@ -1,0 +1,17 @@
+#dataTableGrid td, th{
+    white-space: nowrap;
+}
+
+/*#dataTableGrid tr{
+    background-color: #0b2545 !important;
+}*/
+
+#dataTableGrid td{
+    font-family: helvetica !important;
+    font-size: 15px;
+    /*text-align: left;*/
+}
+
+/*#dataTableGrid td.dt-type-numeric{
+    text-align: right !important;
+}*/

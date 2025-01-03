@@ -1,0 +1,66 @@
+.required:after{
+    content: " *";
+    color: #A80000;
+}
+
+.required{
+    font-style: italic;
+}
+
+.form-label{
+    font-family: helvetica;
+    font-color: #000000
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.inputValidity{
+    color: #FF0000;
+}
+
+.formField{
+    margin-top: 20px;
+}
+
+#modalInsert, #modalTest{
+    background-color: #157347;
+    color: white;
+}
+
+#modalInsert h5, #modalTest h5{
+    font-family: Helvetica;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.form-control{
+    background-color: #FFFFFF;
+}
+
+.modal-body{
+    background-color: #F5F5F5;
+}
+
+
+
+.input-group span{
+    background-color: #E8F0FE;
+}
+
+
+#additionalNotes{
+    margin-top: 80px;
+}
+
+#additionalNotes h6{
+    color: #af0303;
+    font-style: italic;
+}
+
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

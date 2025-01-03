@@ -1,0 +1,278 @@
+{% extends 'layout_catalogs.html' %}
+
+
+{% block title %}Equipos{% endblock %}
+
+
+{% block styles %}
+    <link href="../static/css/table_test.css" rel="stylesheet">
+{% endblock %}
+
+
+{% block scripts %}
+    <script defer src="../static/js/runners_datatables.js"></script>
+    <script defer src="../static/js/runners_hard_conf_form.js"></script>
+    <script defer src="../static/js/runners_hard_conf.js"></script>
+    <script defer src="../static/js/runners_soft_conf_form.js"></script>
+    <script defer src="../static/js/runners_soft_conf.js"></script>
+    <script defer src="../static/js/runners_insert_validity.js"></script>
+{% endblock %}
+
+
+{% block head_title %}Equipos{% endblock %}
+
+{% block note %}
+    <h6><strong>Nota:</strong> Antes de registrar un nuevo equipo, asegúrese de conocer las especificaciones de hardware (procesador, disco duro y memoria ram) y software (sistema operativo) del mismo.</h6>
+{% endblock %}
+
+{% block columns %}
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Descripción</th>
+    <th>Dirección IP</th>
+    <th>Configuración Hardware</th>
+    <th>Configuración Software</th>
+{% endblock %}
+
+
+{% block content %}
+<!-- INSERTAR -->
+<div class="modal modal-lg fade" tabindex="-1" id="testModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" id="modalInsert">
+                <h5 class="modal-title">SUPER TEST</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="insertRunnerForm" action="/insert_runner" method="POST">
+                    <div class="row">
+                        <div class="col-md-8 ms-auto">
+                            <label for="runnerName" class="form-label required">Nombre:</label>
+                            <input id="runnerName" name="runnerName" class="form-control" type="text" placeholder="Ejemplo">
+                            <small id="runnerNameNull" style="color: red;"></small>
+                        </div>
+                        <div class="col-md-4 ms-auto">
+                            <label for="runnerIp" class="form-label required">Dirección IP:</label>
+                            <input id="runnerIp" name="runnerIp" class="form-control" type="text" placeholder="0.0.0.0">
+                            <small id="runnerIpNull" style="color: red;"></small>
+                        </div>
+                    </div>
+                    <div class="row formField">
+                        <div class="col-md-12 ms-auto">
+                            <label for="runnerDesc" class="form-label">Descripción:</label>
+                            <textarea id="runnerDesc" name="runnerDesc" class="form-control" placeholder="Ejemplo" style="resize: none;"></textarea>
+                        </div>
+                    </div>
+                    <div class="row formField">
+                        <div class="col-md-12 ms-auto">
+                            <label for="runnerHardConf" class="form-label required">Configuración de Hardware:</label>
+                            <div class="input-group">
+                                <input id="runnerHardConfId" name="runnerHardConfId" class="form-control" type="text" style="flex: 1;" disabled>
+                                <input id="runnerHardConf" name="runnerHardConf" class="form-control" type="text" style="flex: 8;" disabled>
+                                <button id="hardConfModal" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#testHardConf" style="flex: 1;"><i class="icon-ajuste"></i></button>
+                            </div>
+                            <small id="runnerHardConfNull" style="color: red;"></small>
+                        </div>
+                    </div>
+                    <div class="row formField">
+                        <div class="col-md-12 ms-auto">
+                            <label for="runnerSoftConf" class="form-label required">Configuración de Software:</label>
+                            <div class="input-group">
+                                <input id="runnerSoftConfId" name="runnerSoftConfId" class="form-control" type="text" style="flex: 1;" disabled>
+                                <input id="runnerSoftConf" name="runnerSoftConf" class="form-control" type="text" style="flex: 8;" disabled>
+                                <button id="softConfModal" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#testSoftConf" style="flex: 1;"><i class="icon-ajuste"></i></button>
+                            </div>
+                            <small id="runnerSoftConfNull" style="color: red;"></small>
+                        </div>
+                    </div>
+                    <div class="row formField">
+                        <div class="col-md-12 ms-auto" style="text-align: right;">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button id="insertTestButton" type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- MODIFICAR -->
+<div class="modal modal-lg fade" tabindex="-1" id="updateRunnerModal">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Actualizar Equipo</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="updateRunnerForm" action="/update_runner" method="POST">
+                <div class="row">
+                    <div class="col-md-3 ms-auto">
+                        <label for="updateRunnerId" class="form-label">ID:</label>
+                        <input id="updateRunnerId" name="updateRunnerId" class="form-control" type="text" disabled>
+                    </div>
+                    <div class="col-md-6 ms-auto">
+                        <label for="updateRunnerName" class="form-label">Nombre:</label>
+                        <input id="updateRunnerName" name="updateRunnerName" class="form-control" type="text" placeholder="Ejemplo">
+                        <small id="updateRunnerNameNull" style="color: red;"></small>
+                    </div>
+                    <div class="col-md-3 ms-auto">
+                        <label for="updateRunnerIp" class="form-label">Dirección IP:</label>
+                        <input id="updateRunnerIp" name="updateRunnerIp" class="form-control" type="text" placeholder="0.0.0.0">
+                        <small id="updateRunnerIpNull" style="color: red;"></small>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="updateRunnerDesc" class="form-label">Descripción:</label>
+                    <input id="updateRunnerDesc" name="updateRunnerDesc" class="form-control" type="text" placeholder="Ejemplo">
+                </div>
+                <div class="row">
+                    <div class="col-md-6 ms-auto">
+                        <label for="updateRunnerHardConf" class="form-label">Configuración de Hardware:</label>
+                        <select id="updateRunnerHardConf" name="updateRunnerHardConf" class="form-control runnerHardConf"></select>
+                        <small id="updateRunnerHardConfNull" style="color: red;"></small>
+                    </div>
+                    <div class="col-md-6 ms-auto">
+                        <label for="updateRunnerSoftConf" class="form-label">Configuración de Software:</label>
+                        <select id="updateRunnerSoftConf" name="updateRunnerSoftConf" class="form-control runnerSoftConf"></select>
+                        <small id="updateRunnerSoftConfNull" style="color: red;"></small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button id="updateRunnerButton" type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+<!-- CONFIGURACIÓN DE HARDWARE -->
+<div class="modal fade" tabindex="-1" id="testHardConf">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Configuración de Hardware</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="verifyHcForm">
+                    <div class="row">
+                        <div class="col-md-12 ms-auto">
+                            <label for="verifyHcProcessor" class="form-label required">Procesador:</label>
+                            <select id="verifyHcProcessor" name="verifyHcProcessor" class="form-control hcProcessor">
+                                <option value="" selected disabled>Seleccione:</option>
+                            </select>
+                            <small id="nullProcessor" style="color: red;"></small>
+                        </div>
+                    </div>
+                    <div class="row formField">
+                        <div class="col-md-12 ms-auto">
+                            <label for="verifyHcHardDrive" class="form-label required">Disco Duro:</label>
+                            <select id="verifyHcHardDrive" name="verifyHcHardDrive" class="form-control hcHardDrive">
+                                <option value="" selected disabled>Seleccione:</option>
+                            </select>
+                            <small id="nullHardDrive" style="color: red;"></small>
+                        </div>
+                    </div>
+                    <div class="row formField">
+                        <div class="col-md-12 ms-auto">
+                            <label for="verifyHcRam" class="form-label required">Memoria RAM:</label>
+                            <select id="verifyHcRam" name="verifyHcRam" class="form-control hcRam">
+                                <option value="" selected disabled>Seleccione:</option>
+                            </select>
+                            <small id="nullRam" style="color: red;"></small>
+                        </div>
+                    </div>
+                    <div class="row formField">
+                        <div class="col-md-12 ms-auto" id="dynamicName"></div>
+                    </div>
+                    <div class="row formField">
+                        <div class="col-md-12 ms-auto" id="dynamicDescription"></div>
+                    </div>
+                    <div class="row formField">
+                        <div class="col-md-12 ms-auto">
+                            <small id="erasedRecord" style="color: red;"></small>
+                        </div>
+                    </div>
+                    <div class="row formField">
+                        <div class="col-md-12 ms-auto" style="text-align: right;">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#testModal">Cerrar</button>
+                            <button id="verifyHcButton" type="submit" class="btn btn-success">Verificar</button>
+                            <button id="testInsertHcButton" type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- CONFIGURACIÓN DE SOFTWARE -->
+<div class="modal fade" tabindex="-1" id="testSoftConf">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" id="modalTest">
+                <h5 class="modal-title">Configuración de Software</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="insertScForm">
+                    <div class="row">
+                        <div class="col-md-12 ms-auto">
+                            <label for="scOpSys" class="form-label required">Sistema Operativo:</label>
+                            <select id="scOpSys" name="scOpSys" class="form-control scOpSys">
+                                <option value="" selected disabled>Seleccione:</option>
+                            </select>
+                            <small id="nullOs" style="color: red;"></small>
+                        </div>
+                    </div>
+                    <div class="row formField">
+                        <div class="col-md-12 ms-auto" id="dynamicOsName"></div>
+                    </div>
+                    <div class="row formField">
+                        <div class="col-md-12 ms-auto" id="dynamicOsDesc"></div>
+                    </div>
+                    <div class="row formField">
+                        <div class="col-md-12 ms-auto">
+                            <small id="scErased" style="color: red;"></small>
+                        </div>
+                    </div>
+                    <div class="row formField">
+                        <div class="col-md-12 ms-auto" style="text-align: right;">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#testModal">Cerrar</button>
+                            <button id="verifyScButton" type="submit" class="btn btn-success">Verificar</button>
+                            <button id="insertScButton" type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
+
+
+{% block delete_content %}del Equipo{% endblock %}
+
+
+{% block deleteRecordForm %}
+    <form id="deleteRunnerForm" action="/delete/delete_runner" method="POST">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Aceptar</button>
+    </form>
+{% endblock %}

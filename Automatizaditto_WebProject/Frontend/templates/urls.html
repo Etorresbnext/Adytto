@@ -1,0 +1,156 @@
+{% extends 'layout_catalogs.html' %}
+
+
+{% block title %}URLS{% endblock %}
+
+
+{% block styles %}{% endblock %}
+
+
+{% block scripts %}
+    <script defer src="../static/js/urls_datatables.js"></script>
+    <script defer src="../static/js/urls_insert_validity.js"></script>
+    <script defer src="../static/js/update_urls_validity.js"></script>
+{% endblock %}
+
+
+{% block head_title %}URLS{% endblock %}
+
+
+{% block columns %}
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>URL</th>
+    <th>Ambiente</th>
+    <th>Producto</th>
+{% endblock %}
+
+
+{% block insert_title %}Agregar URL{% endblock %}
+{% block update_title %}Actualizar Información de la URL{% endblock %}
+{% block delete_content %}de la URL{% endblock %}
+
+
+{% block addRecordForm %}
+    <form id="insertURLForm" action="/insert_url" method="POST">
+        <div class="row">
+            <div class="col-md-12 ms-auto">
+                <label for="urlName" class="form-label required">Nombre:</label>
+                <input id="urlName" name="urlName" class="form-control" type="text" placeholder="Ejemplo">
+                <small id="urlNameNull" class="inputValidity"></small>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-6 ms-auto">
+                <label for="urlEnv" class="form-label required">Ambiente:</label>
+                <select id="urlEnv" name="urlEnv" class="form-control urlEnv">
+                    <option value="" disabled selected>Seleccione:</option>
+                </select>
+                <small id="envNull" class="inputValidity"></small>
+            </div>
+            <div class="col-md-6 ms-auto">
+                <label for="urlProduct" class="form-label required">Producto:</label>
+                <select id="urlProduct" name="urlProduct" class="form-control urlProduct">
+                    <option value="" disabled selected>Seleccione:</option>
+                </select>
+                <small id="productNull" class="inputValidity"></small>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-12 ms-auto">
+                <div class="input-group">
+                    <div class="col-lg-2">
+                        <label for="urlProtocol" class="form-label required">Protocolo:</label>
+                        <select id="urlProtocol" name="urlProtocol" class="form-control urlProtocol" style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
+                            <option value="" disabled selected>Seleccione:</option>
+                        </select>
+                        <small id="protocolNull" class="inputValidity"></small>
+                    </div>
+                    <div class="col-lg-3">
+                        <label for="urlDomain" class="form-label required">Dominio:</label>
+                        <input id="urlDomain" name="urlDomain" class="form-control" type="text" placeholder="0.0.0.0" style="border-radius: 0;">
+                        <small id="urlDomainNull" class="inputValidity"></small>
+                    </div>
+                    <div class="col-lg-3">
+                        <label for="urlPort" class="form-label required">Puerto:</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="inputGroupPrependPort" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">:</span>
+                            <input id="urlPort" name="urlPort" class="form-control" type="number" placeholder="####" style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
+                        </div>
+                        <small id="urlPortNull" class="inputValidity" style="margin-left: 35px;"></small>
+                    </div>
+                    <div class="col-lg-4">
+                        <label for="urlPath" class="form-label required">Ruta:</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="inputGroupPrependFinal" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">/</span>
+                            <input id="urlPath" name="urlPath" class="form-control" type="text" placeholder="ejemplo">
+                        </div>
+                        <small id="urlPathNull" class="inputValidity" style="margin-left: 35px;"></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 ms-auto" style="text-align: right;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button id="insertURLButton" type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block updateRecordForm %}
+    <form id="updateURLForm" action="/update_url" method="POST">
+        <div class="row">
+            <div class="col-md-4 ms-auto">
+                <label for="updateURLId" class="form-label">ID:</label>
+                <input id="updateURLId" name="updateURLId" class="form-control" type="text" disabled>
+            </div>
+            <div class="col-md-8 ms-auto">
+                <label for="updateURLName" class="form-label">Nombre:</label>
+                <input id="updateURLName" name="updateURLName" class="form-control" type="text" placeholder="Ejemplo">
+                <small id="updateURLNameNull" style="color: red;"></small>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="updateUrlDomain" class="form-label">Dominio:</label>
+            <div class="input-group">
+                <select id="updateUrlProtocol" name="updateUrlProtocol" class="form-control urlProtocol"></select>
+                <input id="updateUrlDomain" name="updateUrlDomain" class="form-control" type="text" placeholder="0.0.0.0">
+                <span class="input-group-text">:</span>
+                <input id="updateUrlPort" name="updateUrlPort" class="form-control" type="number" placeholder="####">
+                <span class="input-group-text">/</span>
+            </div>
+            <small id="updateUrlDomainNull" style="color: red;"></small><br>
+            <small id="updateUrlPortNull" style="color: red;"></small>
+        </div>
+        <div class="mb-3">
+            <label for="updateUrlPath" class="form-label">Ruta:</label>
+            <input id="updateUrlPath" name="updateUrlPath" class="form-control" type="text" placeholder="ejemplo">
+            <small id="updateUrlPathNull" style="color: red;"></small>
+        </div>
+        <div class="row">
+            <div class="col-md-6 ms-auto">
+                <label for="updateUrlEnv">Ambiente:</label>
+                <select id="updateUrlEnv" name="updateUrlEnv" class="form-control urlEnv"></select>
+            </div>
+            <div class="col-md-6 ms-auto">
+                <label for="updateUrlProduct">Producto:</label>
+                <select id="updateUrlProduct" name="updateUrlProduct" class="form-control urlProduct"></select>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button id="updateUrlButton" type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block deleteRecordForm %}
+    <form id="deleteURLForm" action="/delete/delete_url" method="POST">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Aceptar</button>
+    </form>
+{% endblock %}

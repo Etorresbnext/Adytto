@@ -1,0 +1,148 @@
+<aside id="sidebar">
+    <div class="d-flex">
+        <button class="toggle-btn" type="button">
+            <i class="icon-helado"></i>
+        </button>
+        <div class="sidebar-logo">
+            <a href="/main">Heladito</a>
+        </div>
+    </div>
+    <ul class="sidebar-nav">
+        {% if 'show_management_users_btn_permission' in user_permissions %}
+            <li class="sidebar-item">
+                <a href="{{ url_for('render_page', page_name='users') }}" class="sidebar-link">
+                    <i class="lni lni-users"></i>
+                    <span>Administración de Usuarios</span>
+                </a>
+            </li>
+        {% endif %}
+        {% if 'show_runners_disponibility_btn_permission' in user_permissions %}
+            <li class="sidebar-item">
+                <a href="{{ url_for('render_page', page_name='runners-status') }}" class="sidebar-link">
+                    <i class="lni lni-users"></i>
+                    <span>Disponibilidad de Equipos</span>
+                </a>
+            </li>
+        {% endif %}
+        <li class="sidebar-item">
+            <a href="#" class="sidebar-link collapsed has-dropdown cat" data-bs-toggle="collapse"
+                data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
+                <i class="lni lni-grid-alt"></i>
+                <span>Catálogos</span>
+            </a>
+
+
+
+            <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                       data-bs-target="#runners" aria-expanded="false" aria-controls="runners" style="margin-left:20px;">
+                        Configuración de Equipos
+                    </a>
+                    <ul id="runners" class="list-unstyled collapse" data-bs-parent="#auth">
+                        <li class="sidebar-item">
+                            <a href="{{ url_for('render_page', page_name='hardware-configurations') }}" class="sidebar-link" style="margin-left:20px;">
+                                Configuraciones de Hardware
+                            </a>
+                            <a href="{{ url_for('render_page', page_name='processors') }}" class="sidebar-link" style="margin-left:20px;">
+                                Procesadores
+                            </a>
+                            <a href="{{ url_for('render_page', page_name='hard-drives') }}" class="sidebar-link" style="margin-left:20px;">
+                                Discos Duros
+                            </a>
+                            <a href="{{ url_for('render_page', page_name='rams') }}" class="sidebar-link" style="margin-left:20px;">
+                                Memorias RAM
+                            </a>
+                            <a href="{{ url_for('render_page', page_name='software-configurations') }}" class="sidebar-link" style="margin-left:20px;">
+                                Configuraciones de Software
+                            </a>
+                            <a href="{{ url_for('render_page', page_name='operative-systems') }}" class="sidebar-link" style="margin-left:20px;">
+                                Sistemas Operativos
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{ url_for('render_page', page_name='runners') }}" class="sidebar-link" style="margin-left:20px;">
+                        <i class="icon-agregar"></i>
+                        Equipos
+                    </a>
+                </li>
+                {% if 'show_products_btn_permission' in user_permissions %}
+                <li class="sidebar-item">
+                    <a href="{{ url_for('render_page', page_name='products') }}" class="sidebar-link" style="margin-left:20px;">
+                        <i class="icon-agregar"></i>
+                        Productos
+                    </a>
+                </li>
+                {% endif %}
+                {% if 'show_test_cases_btn_permissions' in user_permissions %}
+                <li class="sidebar-item">
+                    <a href="{{ url_for('render_page', page_name='test-cases') }}" class="sidebar-link" style="margin-left:20px;">
+                        <i class="icon-prueba"></i>
+                        Casos de Prueba
+                    </a>
+                </li>
+                {% endif %}
+                {% if 'show_object_types_btn_permissions' in user_permissions %}
+                <li class="sidebar-item">
+                    <a href="{{ url_for('render_page', page_name='object-types') }}" class="sidebar-link" style="margin-left:20px;">
+                        <i class="icon-programacion-web"></i>
+                        Tipos de Objeto
+                    </a>
+                </li>
+                {% endif %}
+                {% if 'show_objects_btn_permissions' in user_permissions %}
+                <li class="sidebar-item">
+                    <a href="{{ url_for('render_page', page_name='objects') }}" class="sidebar-link" style="margin-left:20px;">
+                        <i class="icon-codigo"></i>
+                        Objetos
+                    </a>
+                </li>
+                {% endif %}
+                <li class="sidebar-item">
+                    <a href="{{ url_for('render_page', page_name='urls') }}" class="sidebar-link" style="margin-left:20px;">
+                        <i class="icon-enlace"></i>
+                        URLS
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="sidebar-item">
+            <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                data-bs-target="#testcases" aria-expanded="false" aria-controls="testcases">
+                <i class="lni lni-play"></i>
+                <span>Ejecución de Pruebas</span>
+            </a>
+            <ul id="testcases" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#test" aria-expanded="false" aria-controls="test">Field Service</a>
+                    <ul id="test" class="testcases-dropdown list-unstyled collapse" data-bs-parent="#testcases">
+                        <li class="sidebar-item">
+                            <a href="{{ url_for('render_page', page_name='urls') }}" class="sidebar-link" style="margin-left:20px;">
+                                <i class="icon-enlace"></i>
+                                URLS
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">GLUP</a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="sidebar-item">
+            <a href="{{ url_for('render_page', page_name='profile') }}" class="sidebar-link">
+                <i class="lni lni-cog"></i>
+                <span>Ajustes de Perfil</span>
+            </a>
+        </li>
+    </ul>
+    <div class="sidebar-footer">
+        <a href="#" class="sidebar-link" data-bs-toggle="modal" data-bs-target="#logoutModal">
+            <i class="lni lni-exit"></i>
+            <span>Logout</span>
+        </a>
+    </div>
+</aside>

@@ -1,0 +1,104 @@
+{% extends 'layout_catalogs.html' %}
+
+
+{% block title %}Discos Duros{% endblock %}
+
+
+{% block styles %}
+    <link href="../static/css/table_test.css" rel="stylesheet">
+{% endblock %}
+
+
+{% block scripts %}
+    <script defer src="../static/js/hard-drives.js"></script>
+    <script defer src="../static/js/hard-drives_datatables.js"></script>
+    <script defer src="../static/js/hard-drives_validity.js"></script>
+{% endblock %}
+
+
+{% block head_title %}Discos Duros{% endblock %}
+
+
+{% block columns %}
+    <th>ID</th>
+    <th>Marca</th>
+    <th>Tipo</th>
+    <th>Almacenamiento</th>
+{% endblock %}
+
+
+{% block insert_title %}Agregar Disco Duro{% endblock %}
+{% block update_title %}Actualizar Información del Disco Duro{% endblock %}
+{% block delete_content %}del Disco Duro{% endblock %}
+
+
+{% block addRecordForm %}
+    <form id="insertHardDriveForm" action="/insert_hard-drive" method="POST">
+        <div class="row">
+            <div class="col-md-4 ms-auto">
+                <label for="hardDriveBrand" class="form-label required">Marca:</label>
+                <select id="hardDriveBrand" name="hardDriveBrand" class="form-control hardDriveBrand">
+                    <option value="" disabled selected>Seleccione:</option>
+                </select>
+                <small id="hardDriveBrandNull" class="inputValidity"></small>
+            </div>
+            <div class="col-md-4 ms-auto">
+                <label for="hardDriveType" class="form-label required">Tipo:</label>
+                <select id="hardDriveType" name="hardDriveType" class="form-control hardDriveType">
+                    <option value="" disabled selected>Seleccione:</option>
+                </select>
+                <small id="hardDriveTypeNull" class="inputValidity"></small>
+            </div>
+            <div class="col-md-4 ms-auto">
+                <label for="hardDriveStorage" class="form-label required">Almacenamiento:</label>
+                <div class="input-group">
+                    <input id="hardDriveStorage" name="hardDriveStorage" class="form-control" type="number">
+                    <select id="storageUnits" name="storageUnits" class="form-control storageUnits">
+                        <option value="" disabled selected>Seleccione:</option>
+                    </select>
+                </div>
+                <small id="hardDriveStorageNull" class="inputValidity"></small>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-12 ms-auto" style="text-align: right;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button id="insertHardDriveButton" type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block updateRecordForm %}
+    <form id="updateHardDriveForm" action="/update_hard-drive" method="POST">
+        <div class="row">
+            <div class="col-md-4 ms-auto">
+                <label for="updateHardDriveId" class="form-label">ID:</label>
+                <input id="updateHardDriveId" name="updateHardDriveId" class="form-control" type="text" disabled>
+            </div>
+            <div class="col-md-4 ms-auto">
+                <label for="updateHardDriveType" class="form-label">Tipo:</label>
+                <select id="updateHardDriveType" name="updateHardDriveType" class="form-control hardDriveType"></select>
+                <small id="updateHardDriveTypeNull" style="color: red;"></small>
+            </div>
+            <div class="col-md-4 ms-auto">
+                <label for="updateHardDriveStorage" class="form-label">Almacenamiento:</label>
+                <input id="updateHardDriveStorage" name="updateHardDriveStorage" class="form-control" type="text" placeholder="000 GB">
+                <small id="updateHardDriveStorageNull" style="color: red;"></small>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button id="updateHardDriveButton" type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block deleteRecordForm %}
+    <form id="deleteHardDriveForm" action="/delete/delete_hard-drive" method="POST">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Aceptar</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends 'layout_catalogs.html' %}
+
+
+{% block title %}Configuraciones de Hardware{% endblock %}
+
+
+{% block styles %}
+    <link href="../static/css/table_test.css" rel="stylesheet">
+{% endblock %}
+
+
+{% block scripts %}
+    <script defer src="../static/js/hardware-configurations_datatables.js"></script>
+{% endblock %}
+
+
+{% block head_title %}Configuraciones de Hardware{% endblock %}
+
+
+{% block columns %}
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Descripción</th>
+    <th>Procesador</th>
+    <th>Almacenamiento</th>
+    <th>Memoria RAM</th>
+{% endblock %}
+
+
+{% block insert_title %}Agregar Configuración de Hardware{% endblock %}
+{% block update_title %}Actualizar Información de la Configuración de Hardware{% endblock %}
+{% block delete_content %}de la Configuración de Hardware{% endblock %}
+
+
+{% block addRecordForm %}
+    <form id="insertHcForm" action="/insert_hardware_configuration" method="POST">
+        <div class="mb-3">
+            <label for="hcName" class="form-label">Nombre:</label>
+            <input id="hcName" name="hcName" class="form-control" type="text" placeholder="Ejemplo">
+        </div>
+        <div class="mb-3">
+            <label for="hcDesc" class="form-label">Descripción:</label>
+            <input id="hcDesc" name="hcDesc" class="form-control" type="text" placeholder="Ejemplo">
+        </div>
+        <div class="mb-3">
+            <label for="hcProcessor" class="form-label">Procesador:</label>
+            <select id="hcProcessor" name="hcProcessor" class="form-control hcProcessor"></select>
+        </div>
+        <div class="mb-3">
+            <label for="hcHardDrive" class="form-label">Disco Duro:</label>
+            <select id="hcHardDrive" name="hcHardDrive" class="form-control hcHardDrive"></select>
+        </div>
+        <div class="mb-3">
+            <label for="hcRam" class="form-label">Memoria RAM:</label>
+            <select id="hcRam" name="hcRam" class="form-control hcRam"></select>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button id="insertHcButton" type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block updateRecordForm %}
+    <form id="updateHcForm" action="/update_hardware_configuration" method="POST">
+        <div class="mb-3">
+            <label for="updateHcId" class="form-label">ID:</label>
+            <input id="updateHcId" name="updateHcId" class="form-control" type="text" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="updateHcName" class="form-label">Nombre:</label>
+            <input id="updateHcName" name="updateHcName" class="form-control" type="text" placeholder="Ejemplo">
+        </div>
+        <div class="mb-3">
+            <label for="updateHcDesc" class="form-label">Descripción:</label>
+            <input id="updateHcDesc" name="updateHcDesc" class="form-control" type="text" placeholder="Ejemplo">
+        </div>
+        <div class="mb-3">
+            <label for="updateHcProcessor" class="form-label">Procesador:</label>
+            <select id="updateHcProcessor" name="updateHcProcessor" class="form-control hcProcessor"></select>
+        </div>
+        <div class="mb-3">
+            <label for="updateHcHardDrive" class="form-label">Disco Duro:</label>
+            <select id="updateHcHardDrive" name="updateHcHardDrive" class="form-control hcHardDrive"></select>
+        </div>
+        <div class="mb-3">
+            <label for="updateHcRam" class="form-label">Memoria RAM:</label>
+            <select id="updateHcRam" name="updateHcRam" class="form-control hcRam"></select>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button id="updateHcButton" type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block deleteRecordForm %}
+    <form id="deleteHcForm" action="/delete/delete_hard_conf" method="POST">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Aceptar</button>
+    </form>
+{% endblock %}

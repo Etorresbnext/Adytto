@@ -1,0 +1,31 @@
+#addRecordHeader{
+    background-color: #157347;
+}
+
+#addRecordHeader h5{
+    font-family: Helvetica;
+    font-weight: bold;
+    font-size: 22px;
+    color: white;
+    /*text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);*/
+}
+
+
+.modal-body{
+    background-color: #F5F5F5;
+}
+
+.form-control{
+    background-color: #FFFFFF;
+}
+
+#updateRecordHeader{
+    background-color: #0E2238;
+}
+
+#updateRecordHeader h5{
+    font-family: Helvetica;
+    font-weight: bold;
+    font-size: 22px;
+    color: white;
+}

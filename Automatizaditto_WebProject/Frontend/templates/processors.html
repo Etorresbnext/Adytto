@@ -1,0 +1,142 @@
+{% extends 'layout_catalogs.html' %}
+
+
+{% block title %}Procesadores{% endblock %}
+
+
+{% block styles %}
+    <link href="../static/css/table_test.css" rel="stylesheet">
+{% endblock %}
+
+
+{% block scripts %}
+    <script defer src="../static/js/processors.js"></script>
+    <script defer src="../static/js/processors_datatables.js"></script>
+    <script defer src="../static/js/processors_validity.js"></script>
+{% endblock %}
+
+
+{% block head_title %}Procesadores{% endblock %}
+
+
+{% block columns %}
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Marca</th>
+    <th>Modelo</th>
+    <th>Frecuencia</th>
+    <th>Arquitectura</th>
+{% endblock %}
+
+
+{% block insert_title %}Agregar Procesador{% endblock %}
+{% block update_title %}Actualizar Información del Procesador{% endblock %}
+
+
+{% block addRecordForm %}
+    <form id="insertProcessorForm" action="/insert_processor" method="POST">
+        <div class="row">
+            <div class="col-md-8 ms-auto">
+                <label for="processorName" class="form-label required">Nombre:</label>
+                <input id="processorName" name="processorName" class="form-control" type="text" placeholder="Ejemplo">
+                <small id="processorNameNull" class="inputValidity"></small>
+            </div>
+            <div class="col-md-4 ms-auto">
+                <label for="processorBrand" class="form-label required">Marca:</label>
+                <select id="processorBrand" name="processorBrand" class="form-control processorBrand">
+                    <option value="" disabled selected>Seleccione:</option>
+                </select>
+                <small id="processorBrandNull" class="inputValidity"></small>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-4 ms-auto">
+                <label for="processorModel" class="form-label required">Modelo:</label>
+                <input id="processorModel" name="processorModel" class="form-control" type="text" placeholder="Ejemplo">
+                <small id="processorModelNull" class="inputValidity"></small>
+            </div>
+            <div class="col-md-4 ms-auto">
+                <label for="processorFreq" class="form-label required">Frecuencia:</label>
+                <div class="input-group">
+                    <input id="processorFreq" name="processorFreq" class="form-control" type="text" placeholder="0.00">
+                    <select id="freqUnits" name="freqUnits" class="form-control freqUnits">
+                        <option value="" disabled selected>Seleccione:</option>
+                    </select>
+                </div>
+                <small id="processorFreqNull" class="inputValidity"></small>
+            </div>
+            <div class="col-md-4">
+                <label for="processorArch" class="form-label required">Arquitectura:</label>
+                <select id="processorArch" name="processorArch" class="form-control processorArch">
+                    <option value="" disabled selected>Seleccione:</option>
+                </select>
+                <small id="processorArchNull" class="inputValidity"></small>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-12 ms-auto" style="text-align: right;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button id="insertProcessorButton" type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block updateRecordForm %}
+    <form id="updateProcessorForm" action="/update_processor" method="POST">
+        <div class="row">
+            <div class="col-md-2 ms-auto">
+                <label for="updateProcessorId" class="form-label">ID:</label>
+                <input id="updateProcessorId" name="updateProcessorId" class="form-control" type="text" disabled>
+            </div>
+            <div class="col-md-7 ms-auto">
+                <label for="updateProcessorName" class="form-label">Nombre:</label>
+                <input id="updateProcessorName" name="updateProcessorName" class="form-control" type="text" placeholder="Ejemplo">
+                <small id="updateProcessorNameNull" style="color: red;"></small>
+            </div>
+            <div class="col-md-3 ms-auto">
+                <label for="updateProcessorBrand" class="form-label">Marca:</label>
+                <select id="updateProcessorBrand" name="updateProcessorBrand" class="form-control processorBrand"></select>
+                <small id="updateProcessorBrandNull" style="color: red;"></small>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-4 ms-auto">
+                <label for="updateProcessorModel" class="form-label">Modelo:</label>
+                <input id="updateProcessorModel" name="updateProcessorModel" class="form-control" type="text" placeholder="Ejemplo">
+                <small id="updateProcessorModelNull" style="color: red;"></small>
+            </div>
+            <div class="col-md-4 ms-auto">
+                <label for="updateProcessorFreq" class="form-label required">Frecuencia:</label>
+                <div class="input-group">
+                    <input id="updateProcessorFreq" name="updateProcessorFreq" class="form-control" type="text" placeholder="0.00">
+                    <select id="updateFreqUnits" name="updateFreqUnits" class="form-control freqUnits"></select>
+                    <small id="updateProcessorFreqNull" class="inputValidity"></small>
+                </div>
+            </div>
+            <div class="col-md-4 ms-auto">
+                <label for="updateProcessorArch" class="form-label required">Arquitectura:</label>
+                <select id="updateProcessorArch" name="updateProcessorArch" class="form-control processorArch"></select>
+                <small id="updateProcessorArchNull" class="inputValidity"></small>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-12 ms-auto" style="text-align: right;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button id="updateProcessorButton" type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block delete_content %}del Procesador{% endblock %}
+
+
+{% block deleteRecordForm %}
+    <form id="deleteProcessorForm" action="/delete/delete_processor" method="POST">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Aceptar</button>
+    </form>
+{% endblock %}

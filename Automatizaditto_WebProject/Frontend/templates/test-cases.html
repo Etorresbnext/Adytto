@@ -1,0 +1,105 @@
+{% extends 'layout_catalogs.html' %}
+
+
+{% block title %}Casos de Prueba{% endblock %}
+
+
+{% block styles %}{% endblock %}
+
+
+{% block scripts %}
+    <script type="module" defer src="../static/js/test_cases_datatables.js"></script>
+    <script type="module" defer src="../static/js/test_cases_ajax.js"></script>
+{% endblock %}
+
+
+{% block head_title %}Casos de Prueba{% endblock %}
+
+
+{% block columns %}
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Azure ID</th>
+    <th>Producto</th>
+{% endblock %}
+
+
+{% block insert_title %}Agregar Caso de Prueba{% endblock %}
+{% block update_title %}Actualizar Información del Caso de Prueba{% endblock %}
+{% block delete_content %}del Caso de Prueba{% endblock %}
+
+
+{% block addRecordForm %}
+    <form id="insertTestCaseForm">
+        <div class="row">
+            <div class="col-md-12 ms-auto">
+                <label for="iTestCaseName" class="form-label required">Nombre:</label>
+                <textarea id="iTestCaseName" name="iTestCaseName" class="form-control" placeholder="Ejemplo" style="resize: none;"></textarea>
+                <small id="nullTestCaseName" class="inputValidity"></small>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-6 ms-auto">
+                <label for="iAzureId" class="form-label required">ID en Azure:</label>
+                <input id="iAzureId" name="iAzureId" class="form-control" type="number" style="appearance: none;">
+                <small id="nullAzureId" class="inputValidity"></small>
+            </div>
+            <div class="col-md-6 ms-auto">
+                <label for="iProductId" class="form-label required">Producto:</label>
+                <select id="iProductId" name="iProductId" class="form-control dropDownProducts">
+                    <option value="" disabled selected>Seleccione:</option>
+                </select>
+                <small id="nullProductId" class="inputValidity"></small>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-12 ms-auto" style="text-align: right;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button id="insertTestCaseButton" type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block updateRecordForm %}
+    <form id="updateTestCaseForm">
+        <div class="row">
+            <div class="col-md-2 ms-auto">
+                <label for="uTestCaseId" class="form-label required">ID:</label>
+                <input id="uTestCaseId" name="uTestCaseId" class="form-control" type="text" disabled>
+            </div>
+            <div class="col-md-10 ms-auto">
+                <label for="uTestCaseName" class="form-label required">Nombre:</label>
+                <textarea id="uTestCaseName" name="uTestCaseName" class="form-control" placeholder="Ejemplo" style="resize: none;"></textarea>
+                <small id="uTestCaseNameError" style="color: red;"></small>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-6 ms-auto">
+                <label for="uAzureId" class="form-label required">ID en Azure:</label>
+                <input id="uAzureId" name="uAzureId" class="form-control" type="number" placeholder="#####">
+                <small id="uAzureIdError" style="color: red;"></small>
+            </div>
+            <div class="col-md-6 ms-auto">
+                <label for="uProductId" class="form-label required">Producto:</label>
+                <select id="uProductId" name="uProductId" class="form-control dropDownProducts"></select>
+                <small id="uProductIdError" class="inputValidity"></small>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-12 ms-auto" style="text-align: right;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button id="updateTestCaseButton" type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block deleteRecordForm %}
+    <form id="deleteTestCaseForm" action="/delete/delete_test-case" method="POST">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Aceptar</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,134 @@
+body{
+
+}
+
+#loginheader{
+    margin-bottom: 30px;
+    background-color: #523faf;
+    height: 90%;
+}
+
+#loginheadernavbar{
+    margin-bottom: 20px;
+    align-items: center;
+    height: 100%;
+}
+
+#loginheader a{
+    color: white;
+}
+
+
+.col-sm{
+
+}
+
+
+#loginForm{
+    margin: 10px;
+    background-color: white;
+}
+
+#loginForm img{
+    width: 192px;
+    height: 192px;
+    display: block;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#loginCard{
+    display: block;
+    margin: 0 auto;
+    width: 80%;
+}
+
+#loginBtn{
+    margin: 20px;
+    padding: 20px;
+}
+
+#row{
+    margin: 20px;
+    padding: 10px;
+    align-items: center;
+}
+
+.col-sm-6{
+    display: block;
+    margin: 0 auto;
+}
+
+#loginBtn button{
+    display: block;
+    margin: 0 auto;
+    width: 80%;
+}
+
+.col-sm-5, .col-sm-7{
+    align-items: center;
+
+}
+
+#accountcreate{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#passwordchange{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/*body {
+    background-color: #FFFFFF;
+    margin: 0;  Asegura que no haya margen alrededor del body
+}*/
+
+#loginNavbar {
+    background-color: #000000;
+    padding: 10px;
+}
+
+#loginNavbar a {
+    color: #FFFFFF;
+}
+
+
+#user_email {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+#user_password {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+#loginFooter {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #604CC3;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+#loginFooter div {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#loginFooter a {
+    color: white;
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Inicio de Sesión</title>
+
+        <link href="../static/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link href="../static/css/login.css" rel="stylesheet">
+        <link rel="icon" href="../static/favicon.ico">
+
+        <script defer src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script defer src="../static/js/login.js"></script>
+    </head>
+    <body>
+
+        <div id="login">
+          <div class="row">
+            <div class="col-sm"></div>
+            <div class="col-sm">
+                <form id="loginForm">
+                    <img src="../static/images/user.png">
+                    <small id="userAuthFail"></small>
+                    <div id="loginCard" class="card">
+                       <div id="loginCardHeader" class="card-header">
+                           Iniciar Sesión
+                       </div>
+                       <div class="form-floating">
+                           <input type="email" class="form-control" id="user_email" placeholder="correo@ejemplo.com" name="user_email" required>
+                           <label for="user_email">Correo Electrónico</label>
+                       </div>
+                       <div class="form-floating">
+                           <input type="password" class="form-control" id="user_password" placeholder="contraseña" name="user_password">
+                           <label for="user_password">Contraseña</label>
+                       </div>
+                        <div id="loginBtn">
+                            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                        </div>
+                        <div id="row" class="row">
+                            <div class="col-sm-5" id="accountcreate">
+                                <a href="#">Crear cuenta</a>
+                            </div>
+                            <div class="col-sm-7" id="passwordchange">
+                                <a href="#">¿Olvidaste tu contraseña?</a>
+                            </div>
+                        </div>
+                   </div>
+                </form>
+            </div>
+              <div class="col-sm"></div>
+          </div>
+        </div>
+
+        <div id="loginfootercont">
+            <div class="row">
+                <div class="col-sm-12">
+                    <footer id="loginFooter">
+                        <div id="containerFooter">
+                            <p>© Automatizaditto 2024. Todos los derechos reservados</p>
+                            <p>Consulte nuestra <a href="">Política de Privacidad</a></p>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+
+        <script src="../static/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>-->
+    </body>
+</html>

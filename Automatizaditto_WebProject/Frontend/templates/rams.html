@@ -1,0 +1,106 @@
+{% extends 'layout_catalogs.html' %}
+
+
+{% block title %}Memorias RAM{% endblock %}
+
+
+{% block styles %}
+    <link href="../static/css/table_test.css" rel="stylesheet">
+{% endblock %}
+
+
+{% block scripts %}
+    <script defer src="../static/js/rams_datatables.js"></script>
+{% endblock %}
+
+
+{% block head_title %}Memorias RAM{% endblock %}
+
+
+{% block columns %}
+    <th>ID</th>
+    <th>Capacidad</th>
+    <th>Velocidad</th>
+    <th>Tecnología</th>
+{% endblock %}
+
+
+{% block insert_title %}Agregar Memoria RAM{% endblock %}
+{% block update_title %}Actualizar Información de la Memoria RAM{% endblock %}
+{% block delete_content %}de la memoria RAM{% endblock %}
+
+
+{% block addRecordForm %}
+    <form id="insertRamForm" action="/insert_ram" method="POST">
+        <div class="row">
+            <div class="col-md-6 ms-auto">
+                <label for="ramCapacity" class="form-label">Capacidad de Memoria:</label>
+                <div class="input-group">
+                    <input id="ramCapacity" name="ramCapacity" class="form-control" type="number" placeholder="00">
+                    <select id="ramCapacityUnits" name="ramCapacityUnits" class="form-control ramCapacityUnits"></select>
+                </div>
+            </div>
+            <div class="col-md-6 ms-auto">
+                <label for="ramFrequency" class="form-label">Velocidad de Memoria:</label>
+                <div class="input-group">
+                    <input id="ramFrequency" name="ramFrequency" class="form-control" type="number" placeholder="00">
+                    <select id="ramFrequencyUnits" name="ramFrequencyUnits" class="form-control ramFrequencyUnits"></select>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="ramTech" class="form-label">Tecnología de Memoria:</label>
+            <input id="ramTech" name="ramTech" class="form-control" type="text" placeholder="Ejemplo">
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button id="insertRamButton" type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block updateRecordForm %}
+    <form id="updateRamForm" action="/update_ram" method="POST">
+        <div class="mb-3">
+            <label for="updateRamId" class="form-label">ID:</label>
+            <input id="updateRamId" name="updateRamId" class="form-control" type="text" disabled>
+        </div>
+        <div class="row">
+            <div class="col-md-6 ms-auto">
+                <label for="updateRamCapacity" class="form-label">Capacidad de Memoria:</label>
+                <div class="input-group">
+                    <input id="updateRamCapacity" name="updateRamCapacity" class="form-control" type="number" placeholder="00">
+                    <select id="updateRamCapacityUnits" name="updateRamCapacityUnits" class="form-control ramCapacityUnits"></select>
+                </div>
+            </div>
+            <div class="col-md-6 ms-auto">
+                <label for="updateRamFrequency" class="form-label">Velocidad de Memoria:</label>
+                <div class="input-group">
+                    <input id="updateRamFrequency" name="updateRamFrequency" class="form-control" type="number" placeholder="00">
+                    <select id="updateRamFrequencyUnits" name="updateRamFrequencyUnits" class="form-control ramFrequencyUnits"></select>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="updateRamTech" class="form-label">Tecnología de Memoria:</label>
+            <input id="updateRamTech" name="updateRamTech" class="form-control" type="text" placeholder="Ejemplo">
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button id="updateRamButton" type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block deleteRecordForm %}
+    <form id="deleteRamForm" action="/delete/delete_ram" method="POST">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Aceptar</button>
+    </form>
+{% endblock %}
+
+
+
+

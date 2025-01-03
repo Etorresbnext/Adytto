@@ -1,0 +1,137 @@
+{% extends 'layout_catalogs.html' %}
+
+
+{% block title %}Sistemas Operativos{% endblock %}
+
+
+{% block styles %}
+    <link href="../static/css/table_test.css" rel="stylesheet">
+{% endblock %}
+
+
+{% block scripts %}
+    <script defer src="../static/js/operative-systems_datatables.js"></script>
+    <script defer src="../static/js/operative-systems_insert_validity.js"></script>
+{% endblock %}
+
+
+{% block head_title %}Sistemas Operativos{% endblock %}
+
+
+{% block columns %}
+    <th>ID</th>
+    <th>Familia</th>
+    <th>Nombre</th>
+    <th>Edición</th>
+    <th>Versión</th>
+    <th>Arquitectura</th>
+{% endblock %}
+
+
+{% block insert_title %}Agregar Sistema Operativo{% endblock %}
+
+{% block addRecordForm %}
+    <form id="addOsRecordForm">
+        <div class="row">
+            <div class="col-md-4">
+                <label for="osFamily" class="form-label required">Familia:</label>
+                <select id="osFamily" name="osFamily" class="form-control osFamily">
+                    <option value="" disabled selected>Seleccione:</option>
+                </select>
+                <small id="osFamilyNull" class="inputValidity"></small>
+            </div>
+            <div class="col-md-8">
+                <label for="osName" class="form-label required">Nombre:</label>
+                <input id="osName" name="osName" class="form-control" type="text" placeholder="Ejemplo">
+                <small id="osNameNull" class="inputValidity"></small>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-4 ms-auto">
+                <label for="osEdition" class="form-label required">Edición:</label>
+                <input id="osEdition" name="osEdition" class="form-control" type="text" placeholder="Ejemplo">
+                <small id="osEditionNull" class="inputValidity"></small>
+            </div>
+            <div class="col-md-4 ms-auto">
+                <label for="osVersion" class="form-label required">Versión:</label>
+                <input id="osVersion" name="osVersion" class="form-control" type="text" placeholder="Ejemplo">
+                <small id="osVersionNull" class="inputValidity"></small>
+            </div>
+            <div class="col-md-4 ms-auto">
+                <label for="osArch" class="form-label required">Arquitectura:</label>
+                <select id="osArch" name="osArch" class="form-control osArch">
+                    <option value="" disabled selected>Seleccione:</option>
+                </select>
+                <small id="osArchNull" class="inputValidity"></small>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-12 ms-auto" style="text-align: right;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button id="insertRamButton" type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block content %}
+<!-- MODIFICAR -->
+<div class="modal fade" tabindex="-1" id="updateOsModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Actualizar información del Sistema Operativo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="updateOsForm" action="/update_operative_system" method="POST">
+                    <div class="mb-3">
+                        <label for="updateOsId" class="form-label">ID:</label>
+                        <input id="updateOsId" name="updateOsId" class="form-control" type="text" disabled>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 ms-auto">
+                            <label for="updateOsFamily" class="form-label">Familia:</label>
+                            <select id="updateOsFamily" name="updateOsFamily" class="form-control osFamily"></select>
+                        </div>
+                        <div class="col-md-6 ms-auto">
+                            <label for="updateOsName" class="form-label">Nombre:</label>
+                            <input id="updateOsName" name="updateOsName" class="form-control" type="text" placeholder="Ejemplo">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="updateOsEdition" class="form-label">Edición:</label>
+                        <input id="updateOsEdition" name="updateOsEdition" class="form-control" type="text" placeholder="Ejemplo">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 ms-auto">
+                            <label for="updateOsVersion" class="form-label">Versión:</label>
+                            <input id="updateOsVersion" name="updateOsVersion" class="form-control" type="text" placeholder="Ejemplo">
+                        </div>
+                        <div class="col-md-4 ms-auto">
+                            <label for="updateOsArch" class="form-label">Arquitectura:</label>
+                            <select id="updateOsArch" name="updateOsArch" class="form-control osArch"></select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button id="updateOsButton" type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block delete_content %}del Sistema Operativo{% endblock %}
+
+
+{% block deleteRecordForm %}
+    <form id="deleteOsForm" action="/delete/delete_os" method="POST">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Aceptar</button>
+    </form>
+{% endblock %}

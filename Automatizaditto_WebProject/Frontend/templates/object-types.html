@@ -1,0 +1,79 @@
+{% extends 'layout_catalogs.html' %}
+
+
+{% block title %}Tipos de Objetos{% endblock %}
+
+
+{% block styles %}
+
+{% endblock %}
+
+
+{% block scripts %}
+    <script type="module" defer src="../static/js/object_types_datatables.js"></script>
+    <script type="module" defer src="../static/js/object_types_ajax.js"></script>
+{% endblock %}
+
+
+{% block head_title %}Tipos de Objetos{% endblock %}
+
+
+{% block columns %}
+    <th>ID</th>
+    <th>Nombre</th>
+{% endblock %}
+
+
+{% block insert_title %}Agregar Tipo de Objeto{% endblock %}
+{% block update_title %}Actualizar Información del Tipo de Objeto{% endblock %}
+{% block delete_content %}del Tipo de Objeto{% endblock %}
+
+
+{% block addRecordForm %}
+    <form id="insertObjectTypeForm">
+        <div class="row">
+            <div class="col-md-12 ms-auto">
+                <label for="iObjTypeName" class="form-label required">Nombre:</label>
+                <input id="iObjTypeName" name="iObjTypeName" class="form-control" type="text" placeholder="Ejemplo">
+                <small id="iObjTypeNameError" class="inputValidity"></small>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-12 ms-auto" style="text-align: right;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button id="insertObjectTypeButton" type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block updateRecordForm %}
+    <form id="updateObjectTypeForm">
+        <div class="row">
+            <div class="col-md-2 ms-auto">
+                <label for="uObjectTypeId" class="form-label">ID:</label>
+                <input id="uObjectTypeId" name="uObjectTypeId" class="form-control" type="text" disabled>
+            </div>
+            <div class="col-md-10 ms-auto">
+                <label for="uObjectTypeName" class="form-label">Nombre:</label>
+                <input id="uObjectTypeName" name="uObjectTypeName" class="form-control" type="text" placeholder="Ejemplo">
+                <small id="uObjectTypeNameError" style="color: red;"></small>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-12 ms-auto" style="text-align: right;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button id="updateObjectTypeButton" type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block deleteRecordForm %}
+    <form id="deleteObjectTypeForm" action="/delete/delete_object-type" method="POST">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Aceptar</button>
+    </form>
+{% endblock %}
